@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 import '../models/models.dart';
@@ -18,7 +16,17 @@ class AppRouter extends RouterDelegate
       required this.groceryManager,
       required this.profileManager})
       : navigatorKey = GlobalKey<NavigatorState>() {
-    // TODO: Add Listeners
+    appstateManager.addListener((notifyListeners));
+    groceryManager.addListener((notifyListeners));
+    profileManager.addListener((notifyListeners));
+  }
+
+  @override
+  void dispose() {
+    appstateManager.removeListener((notifyListeners));
+    groceryManager.removeListener((notifyListeners));
+    profileManager.removeListener((notifyListeners));
+    super.dispose();
   }
 
   // TODO: Dispose listeners
@@ -28,9 +36,10 @@ class AppRouter extends RouterDelegate
     return Navigator(
       // 8
       key: navigatorKey,
-      // TODO: Add onPopPage
+      onPopPage: _handlePopPage,
       // 9
       pages: [
+        if (!appstateManager.isInizialized) SplashScreen.page(),
         // TODO: Add SplashScreen
         // TODO: Add LoginScreen
         // TODO: Add OnboardingScreen
@@ -43,7 +52,19 @@ class AppRouter extends RouterDelegate
     );
   }
 
-  // TODO: Add _handlePopPage
+  // _handlePopPage
+  bool _handlePopPage(Route<dynamic> route, result) {
+    if (!route.didPop(result)) {
+      return false;
+    }
+
+    // TODO: Handle Onboarding and splash
+    // TODO: Handle state when user closes grocery item screen
+    // TODO: Handle state when user closes profile screen
+    // TODO: Handle state when user closes WebView screen
+    // 6
+    return true;
+  }
 
   // 10
   @override
