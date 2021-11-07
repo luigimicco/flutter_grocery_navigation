@@ -7,23 +7,23 @@ class AppRouter extends RouterDelegate
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   @override
   final GlobalKey<NavigatorState> navigatorKey;
-  final AppstateManager appstateManager;
+  final AppstateManager appStateManager;
   final GroceryManager groceryManager;
   final ProfileManager profileManager;
 
   AppRouter(
-      {required this.appstateManager,
+      {required this.appStateManager,
       required this.groceryManager,
       required this.profileManager})
       : navigatorKey = GlobalKey<NavigatorState>() {
-    appstateManager.addListener((notifyListeners));
+    appStateManager.addListener((notifyListeners));
     groceryManager.addListener((notifyListeners));
     profileManager.addListener((notifyListeners));
   }
 
   @override
   void dispose() {
-    appstateManager.removeListener((notifyListeners));
+    appStateManager.removeListener((notifyListeners));
     groceryManager.removeListener((notifyListeners));
     profileManager.removeListener((notifyListeners));
     super.dispose();
@@ -39,8 +39,10 @@ class AppRouter extends RouterDelegate
       onPopPage: _handlePopPage,
       // 9
       pages: [
-        if (!appstateManager.isInizialized) SplashScreen.page(),
+        if (!appStateManager.isInizialized) SplashScreen.page(),
         // TODO: Add SplashScreen
+        if (appStateManager.isInizialized && !appStateManager.isLoggedIn)
+          LoginScreen.page(),
         // TODO: Add LoginScreen
         // TODO: Add OnboardingScreen
         // TODO: Add Home

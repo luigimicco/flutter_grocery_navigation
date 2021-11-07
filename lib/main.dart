@@ -28,7 +28,7 @@ class _FooderlichState extends State<Fooderlich> {
   @override
   void initState() {
     _appRouter = AppRouter(
-        appstateManager: _appstateManager,
+        appStateManager: _appstateManager,
         groceryManager: _groceryManager,
         profileManager: _profileManager);
     super.initState();
