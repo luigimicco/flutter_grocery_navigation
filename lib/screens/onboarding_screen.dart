@@ -59,7 +59,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         MaterialButton(
           child: const Text('Skip'),
           onPressed: () {
-            // TODO: Onboarding -> Navigate to home
+            // Onboarding -> Navigate to home
+            Provider.of<AppstateManager>(context, listen: false)
+                .completeOnBoarding();
           },
         ),
       ],
