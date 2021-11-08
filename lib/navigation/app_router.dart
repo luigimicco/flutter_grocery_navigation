@@ -39,12 +39,15 @@ class AppRouter extends RouterDelegate
       onPopPage: _handlePopPage,
       // 9
       pages: [
+        // Add SplashScreen
         if (!appStateManager.isInizialized) SplashScreen.page(),
-        // TODO: Add SplashScreen
+        // Add LoginScreen
         if (appStateManager.isInizialized && !appStateManager.isLoggedIn)
           LoginScreen.page(),
-        // TODO: Add LoginScreen
-        // TODO: Add OnboardingScreen
+        // Add OnboardingScreen
+        if (appStateManager.isLoggedIn && !appStateManager.isOnBoardingComplete)
+          OnboardingScreen.page(),
+
         // TODO: Add Home
         // TODO: Create new item
         // TODO: Select GroceryItemScreen

@@ -67,7 +67,9 @@ class LoginScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () async {
-          // TODO: Login -> Navigate to home
+          // Login -> Navigate to home
+          Provider.of<AppstateManager>(context, listen: false)
+              .login('mockUsername', 'mockPassword');
         },
       ),
     );
